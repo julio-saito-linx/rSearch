@@ -4,7 +4,16 @@ require 'open-uri'
 
 # Get a Nokogiri::HTML:Document for the page we’re interested in...
 
-doc = Nokogiri::HTML(open('http://www.google.com/search?q=saitodisse'))
+indice = -1
+pesquisa = ""
+if ARGV[0] =~ /\d+/
+  indice = ARGV.shift.to_i
+  pesquisa = ARGV.join('%20')
+else
+  pesquisa = ARGV.join('%20')
+end
+
+doc = Nokogiri::HTML(open('http://www.google.com/search?q=' + pesquisa))
 
 # Do funky things with it using Nokogiri::XML::Node methods...
 
@@ -17,6 +26,11 @@ end
 titulos = doc.css('.l , .vst em')
 links = doc.css('cite')
 
+if indice != -1
+  puts titulos[indice].content + "\t" + links[indice].content
+  exit
+end
+
 listaDeLinks = []
 
 conta = 0
@@ -28,5 +42,5 @@ for tit in titulos
   conta = conta + 1
 end
 
-listaDeLinks.each{|googleLink| puts googleLink.descricao + ' ( ' + googleLink.link + " );"}
+listaDeLinks.each{|googleLink| puts googleLink.descricao + "\t" + googleLink.link}
 
