@@ -1,0 +1,14 @@
+install:
+ruby 1.8.6
+ruby gem lastest version
+sudo gem install nokogiri
+
+usage:
+- search Google first page
+ruby search.rb saitodisse
+
+- search Google unique item
+ruby search.rb 0 saitodisse
+
+- search OneDDl information
+ruby Oneddl_Extract_imdb_link.rb http://www.oneddl.com/movies/fight-club-1999-1080p-bd9-x264-bdisc/
