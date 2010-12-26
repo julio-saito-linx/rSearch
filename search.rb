@@ -2,45 +2,35 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 
-# Get a Nokogiri::HTML:Document for the page we’re interested in...
-
-indice = -1
+i = -1
 pesquisa = ""
 if ARGV[0] =~ /\d+/
-  indice = ARGV.shift.to_i
+  # has index
+  i = ARGV.shift.to_i
   pesquisa = ARGV.join('%20')
 else
+  # all itens from first page
   pesquisa = ARGV.join('%20')
 end
 
 doc = Nokogiri::HTML(open('http://www.google.com/search?q=' + pesquisa))
 
-# Do funky things with it using Nokogiri::XML::Node methods...
-
-class GoogleLink
-  attr_accessor :descricao, :link
-end
-
-####
 # Search for nodes by css
-titulos = doc.css('.l , .vst em')
-links = doc.css('cite')
+links = doc.css('.l , .vst em')
 
-if indice != -1
-  puts titulos[indice].content + "\t" + links[indice].content
+# nothing founded
+if links[0] == nil
+  puts
   exit
 end
 
-listaDeLinks = []
-
-conta = 0
-for tit in titulos 
-  googleLink = GoogleLink.new
-  googleLink.descricao = tit.content
-  googleLink.link = links[conta].content
-  listaDeLinks.push googleLink
-  conta = conta + 1
+# index specified
+if i != -1
+  puts links[i].content + "\t" + links[i][:href]
+  exit
 end
 
-listaDeLinks.each{|googleLink| puts googleLink.descricao + "\t" + googleLink.link}
-
+# first page
+for tit in links
+  puts tit.content + "\t" + tit[:href]
+end
