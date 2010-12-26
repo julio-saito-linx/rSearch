@@ -5,10 +5,13 @@ sudo gem install nokogiri
 
 usage:
 - search Google first page
-ruby search.rb saitodisse
+ruby search.rb saitodisse.720p.BluRay.x264.mkv
 
 - search Google unique item
-ruby search.rb 0 saitodisse
+ruby search.rb 0 saitodisse.720p.BluRay.x264.mkv
 
-- search OneDDl information
-ruby Oneddl_Extract_imdb_link.rb http://www.oneddl.com/movies/fight-club-1999-1080p-bd9-x264-bdisc/
+- search OneDDL imdb link and release name
+ruby Oneddl_Extract_imdb_link.rb http://www.oneddl.com/movies/saitodisse.720p.BluRay.x264.mkv/
+
+- get imdb info and images. Will save the images in your Movies folder.
+ruby Imdb_get_Info.rb "Z:\Movies\saitodisse.720p.BluRay.x264.mkv" http://www.imdb.com/title/tt909090/
