@@ -10,6 +10,9 @@ ruby search.rb saitodisse.720p.BluRay.x264.mkv
 - search Google unique item
 ruby search.rb 0 saitodisse.720p.BluRay.x264.mkv
 
+- search Google with regex
+ruby search.rb /imdb\.com\/title\/(\w+)/ imdb.com/title Saitodisse, the Film >> search-with-regex_result.txt
+
 - search OneDDL imdb link and release name
 ruby Oneddl_Extract_imdb_link.rb http://www.oneddl.com/movies/saitodisse.720p.BluRay.x264.mkv/
 
